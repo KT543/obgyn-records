@@ -126,6 +126,8 @@
   .chip.sel { background: #e0f5ed; border-color: #6b5b95; color: #4a3a78; font-weight: 600; }
   .chip.sub { padding: 7px 13px; font-size: 13px; }
   .chip.sub.sel { background: #deeefb; border-color: #185FA5; color: #0c4480; }
+  .chip.diag.sel { background: #fef3e2; border-color: #d4860a; color: #7a4d00; font-weight: 600; }
+  .chip.tag.sel  { background: #fdecea; border-color: #c0392b; color: #7b1a14; font-weight: 600; }
 
   /* Sub section */
   .sub-section {
@@ -350,11 +352,88 @@
       </div>
     </div>
 
+    <!-- 診斷 -->
+    <div class="card">
+      <div class="sec-title">診斷</div>
+
+      <!-- 產科診斷 -->
+      <div id="diag-obs">
+        <div class="field">
+          <label>產科診斷（可複選）</label>
+          <div class="chips">
+            <div class="chip diag" onclick="toggleDiag(this,'前置胎盤 Placenta previa')">前置胎盤</div>
+            <div class="chip diag" onclick="toggleDiag(this,'胎盤早剝 Placental abruption')">胎盤早剝</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子癇前症 Preeclampsia')">子癇前症</div>
+            <div class="chip diag" onclick="toggleDiag(this,'妊娠高血壓 PIH')">妊娠高血壓 PIH</div>
+            <div class="chip diag" onclick="toggleDiag(this,'早產 Preterm labor')">早產</div>
+            <div class="chip diag" onclick="toggleDiag(this,'急產 Precipitate labor')">急產</div>
+            <div class="chip diag" onclick="toggleDiag(this,'胎兒窘迫 Fetal distress')">胎兒窘迫</div>
+            <div class="chip diag" onclick="toggleDiag(this,'妊娠糖尿病 GDM')">妊娠糖尿病 GDM</div>
+            <div class="chip diag" onclick="toggleDiag(this,'胎兒異常引產 Induction for fetal anomaly')">胎兒異常引產</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮外孕 Ectopic pregnancy')">子宮外孕</div>
+            <div class="chip diag" onclick="toggleDiag(this,'葡萄胎 Hydatidiform mole')">葡萄胎</div>
+            <div class="chip diag" onclick="toggleDiag(this,'萎縮卵 Blighted ovum')">萎縮卵</div>
+            <div class="chip diag" onclick="toggleDiag(this,'過期流產 Missed abortion')">過期流產</div>
+            <div class="chip diag" onclick="toggleDiag(this,'羊水過多 Polyhydramnios')">羊水過多</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>其他產科診斷</label>
+          <input type="text" id="f-diag-obs-other" placeholder="自由輸入" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- 婦科診斷 -->
+      <div id="diag-gyn" class="hidden">
+        <div class="field">
+          <label>婦科診斷（可複選）</label>
+          <div class="chips">
+            <div class="chip diag" onclick="toggleDiag(this,'子宮肌瘤 Myoma uteri')">子宮肌瘤</div>
+            <div class="chip diag" onclick="toggleDiag(this,'卵巢囊腫 Ovarian cyst')">卵巢囊腫</div>
+            <div class="chip diag" onclick="toggleDiag(this,'輸卵管囊腫 Tubal cyst')">輸卵管囊腫</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮內膜異位症 Endometriosis')">子宮內膜異位症</div>
+            <div class="chip diag" onclick="toggleDiag(this,'巧克力囊腫 Endometrioma')">巧克力囊腫</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮內膜息肉 Endometrial polyp')">子宮內膜息肉</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮內膜增生 Endometrial hyperplasia')">子宮內膜增生</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮頸病變 CIN')">子宮頸病變 CIN</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮頸病變 CIS')">子宮頸病變 CIS</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮頸息肉 Cervical polyp')">子宮頸息肉</div>
+            <div class="chip diag" onclick="toggleDiag(this,'子宮沾黏 Intrauterine adhesion')">子宮沾黏</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>其他婦科診斷</label>
+          <input type="text" id="f-diag-gyn-other" placeholder="自由輸入" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <!-- 特殊標籤 -->
+    <div class="card">
+      <div class="sec-title">特殊標籤</div>
+      <div class="field">
+        <div class="chips">
+          <div class="chip tag" onclick="toggleTag(this,'大出血')">大出血</div>
+          <div class="chip tag" onclick="toggleTag(this,'輸血')">輸血</div>
+          <div class="chip tag" onclick="toggleTag(this,'再次手術')">再次手術</div>
+          <div class="chip tag" onclick="toggleTag(this,'轉院成大')">轉院成大</div>
+          <div class="chip tag" onclick="toggleTag(this,'轉院奇美')">轉院奇美</div>
+          <div class="chip tag" onclick="toggleTag(this,'新生兒異常')">新生兒異常</div>
+          <div class="chip tag" onclick="toggleTag(this,'投訴／糾紛')">投訴／糾紛</div>
+          <div class="chip tag" onclick="toggleTag(this,'困難案例')">困難案例</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>其他標籤</label>
+        <input type="text" id="f-tag-other" placeholder="自由輸入" autocomplete="off">
+      </div>
+    </div>
+
     <!-- 備注 -->
     <div class="card">
       <div class="sec-title">備注</div>
       <div class="field">
-        <textarea id="f-note" rows="3" placeholder="特殊狀況、術中發現、後續追蹤..." style="resize:none"></textarea>
+        <textarea id="f-note" rows="3" placeholder="術中發現、特殊處理、後續追蹤..." style="resize:none"></textarea>
       </div>
     </div>
 
@@ -385,7 +464,7 @@
 
 <script>
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyn3PQ8pxbXebyQq_KrIeUWKB3LS3DqtAdzhdS1usK02pRZRCZVHyCkSylLAKxeE5yRbw/exec';
-  var state = { clinic: '璟馨', branch: '產科', chips: [], count: 0 };
+  var state = { clinic: '璟馨', branch: '產科', chips: [], diag: [], tags: [], count: 0 };
 
   document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
 
@@ -398,11 +477,21 @@
   function setBranch(b, btn) {
     state.branch = b;
     state.chips = [];
+    state.diag = [];
+    state.tags = [];
     document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
     document.getElementById('branch-obs').classList.toggle('hidden', b !== '產科');
     document.getElementById('branch-gyn').classList.toggle('hidden', b !== '婦科');
     document.getElementById('svd-sub').classList.add('hidden');
     document.getElementById('aw-sub').classList.add('hidden');
+    document.getElementById('diag-obs').classList.toggle('hidden', b !== '產科');
+    document.getElementById('diag-gyn').classList.toggle('hidden', b !== '婦科');
+    state.diag = [];
+    state.tags = [];
+    document.querySelectorAll('.chip.diag,.chip.tag').forEach(function(c){c.classList.remove('sel');});
+    document.getElementById('f-diag-obs-other').value = '';
+    document.getElementById('f-diag-gyn-other').value = '';
+    document.getElementById('f-tag-other').value = '';
     btn.parentElement.querySelectorAll('.seg-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
   }
@@ -432,6 +521,18 @@
     });
   }
 
+  function toggleDiag(el, val) {
+    el.classList.toggle('sel');
+    var idx = state.diag.indexOf(val);
+    if (idx === -1) { state.diag.push(val); } else { state.diag.splice(idx, 1); }
+  }
+
+  function toggleTag(el, val) {
+    el.classList.toggle('sel');
+    var idx = state.tags.indexOf(val);
+    if (idx === -1) { state.tags.push(val); } else { state.tags.splice(idx, 1); }
+  }
+
   function showErr(msg) {
     var el = document.getElementById('err-msg');
     el.textContent = msg;
@@ -459,6 +560,14 @@
       branch: state.branch,
       ga:     document.getElementById('f-ga').value.trim(),
       chips:  state.chips.join('、'),
+      diag:   (state.diag.concat(
+                (document.getElementById('f-diag-obs-other').value.trim() ? [document.getElementById('f-diag-obs-other').value.trim()] : [])
+               ).concat(
+                (document.getElementById('f-diag-gyn-other').value.trim() ? [document.getElementById('f-diag-gyn-other').value.trim()] : [])
+               )).join('、'),
+      tags:   (state.tags.concat(
+                (document.getElementById('f-tag-other').value.trim() ? [document.getElementById('f-tag-other').value.trim()] : [])
+               )).join('、'),
       note:   document.getElementById('f-note').value.trim()
     };
 
@@ -499,13 +608,16 @@
     rows.push({ l: '科別', v: p.branch });
     if (p.ga)    rows.push({ l: '孕週 GA', v: p.ga });
     rows.push({ l: '處置', chips: p.chips.split('、') });
+    if (p.diag) rows.push({ l: '診斷', chips: p.diag.split('、') });
+    if (p.tags) rows.push({ l: '標籤', chips: p.tags.split('、'), isTag: true });
     if (p.note)  rows.push({ l: '備注', v: p.note });
 
     var html = rows.map(function(r, i) {
       var divider = i > 0 ? '<div class="s-divider"></div>' : '';
       if (r.chips) {
+        var chipStyle = r.isTag ? 'background:#fdecea;color:#7b1a14' : '';
         return divider + '<div class="s-row"><span class="s-label">' + r.l + '</span><span class="s-val chips-val">' +
-          r.chips.map(function(c) { return '<span class="mini-chip">' + c + '</span>'; }).join('') +
+          r.chips.map(function(c) { return '<span class="mini-chip" style="' + chipStyle + '">' + c + '</span>'; }).join('') +
           '</span></div>';
       }
       return divider + '<div class="s-row"><span class="s-label">' + r.l + '</span><span class="s-val">' + r.v + '</span></div>';
@@ -514,14 +626,24 @@
   }
 
   function newRecord() {
-    ['f-name', 'f-chart', 'f-age', 'f-ga', 'f-note'].forEach(function(id) {
+    ['f-name', 'f-chart', 'f-age', 'f-ga', 'f-note', 'f-diag-obs-other', 'f-diag-gyn-other', 'f-tag-other'].forEach(function(id) {
       document.getElementById(id).value = '';
     });
     document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
     state.chips = [];
+    state.diag = [];
+    state.tags = [];
     document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
     document.getElementById('svd-sub').classList.add('hidden');
     document.getElementById('aw-sub').classList.add('hidden');
+    document.getElementById('diag-obs').classList.toggle('hidden', b !== '產科');
+    document.getElementById('diag-gyn').classList.toggle('hidden', b !== '婦科');
+    state.diag = [];
+    state.tags = [];
+    document.querySelectorAll('.chip.diag,.chip.tag').forEach(function(c){c.classList.remove('sel');});
+    document.getElementById('f-diag-obs-other').value = '';
+    document.getElementById('f-diag-gyn-other').value = '';
+    document.getElementById('f-tag-other').value = '';
     document.getElementById('form-view').classList.remove('hidden');
     document.getElementById('confirm-view').classList.add('hidden');
     window.scrollTo(0, 0);
