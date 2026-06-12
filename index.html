@@ -636,14 +636,8 @@
     document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
     document.getElementById('svd-sub').classList.add('hidden');
     document.getElementById('aw-sub').classList.add('hidden');
-    document.getElementById('diag-obs').classList.toggle('hidden', b !== '產科');
-    document.getElementById('diag-gyn').classList.toggle('hidden', b !== '婦科');
-    state.diag = [];
-    state.tags = [];
-    document.querySelectorAll('.chip.diag,.chip.tag').forEach(function(c){c.classList.remove('sel');});
-    document.getElementById('f-diag-obs-other').value = '';
-    document.getElementById('f-diag-gyn-other').value = '';
-    document.getElementById('f-tag-other').value = '';
+    document.getElementById('diag-obs').classList.toggle('hidden', state.branch !== '產科');
+    document.getElementById('diag-gyn').classList.toggle('hidden', state.branch !== '婦科');
     document.getElementById('form-view').classList.remove('hidden');
     document.getElementById('confirm-view').classList.add('hidden');
     window.scrollTo(0, 0);
