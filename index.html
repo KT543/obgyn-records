@@ -468,34 +468,36 @@
 
   document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
 
+  // ── Segmented control ──
   function setSeg(key, val, btn) {
     state[key] = val;
     btn.parentElement.querySelectorAll('.seg-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
   }
 
-  function setBranch(b, btn) {
-    state.branch = b;
-    state.chips = [];
-    state.diag = [];
-    state.tags = [];
-    document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
-    document.getElementById('branch-obs').classList.toggle('hidden', b !== '產科');
-    document.getElementById('branch-gyn').classList.toggle('hidden', b !== '婦科');
-    document.getElementById('svd-sub').classList.add('hidden');
-    document.getElementById('aw-sub').classList.add('hidden');
-    document.getElementById('diag-obs').classList.toggle('hidden', b !== '產科');
-    document.getElementById('diag-gyn').classList.toggle('hidden', b !== '婦科');
-    state.diag = [];
-    state.tags = [];
-    document.querySelectorAll('.chip.diag,.chip.tag').forEach(function(c){c.classList.remove('sel');});
-    document.getElementById('f-diag-obs-other').value = '';
-    document.getElementById('f-diag-gyn-other').value = '';
-    document.getElementById('f-tag-other').value = '';
+  // ── Branch switch ──
+  function setBranch(branch, btn) {
+    state.branch = branch;
+    resetChipsAndDiag();
+    document.getElementById('branch-obs').classList.toggle('hidden', branch !== '產科');
+    document.getElementById('branch-gyn').classList.toggle('hidden', branch !== '婦科');
+    document.getElementById('diag-obs').classList.toggle('hidden', branch !== '產科');
+    document.getElementById('diag-gyn').classList.toggle('hidden', branch !== '婦科');
     btn.parentElement.querySelectorAll('.seg-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
   }
 
+  // ── Reset all chip selections ──
+  function resetChipsAndDiag() {
+    state.chips = [];
+    state.diag  = [];
+    state.tags  = [];
+    document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
+    document.getElementById('svd-sub').classList.add('hidden');
+    document.getElementById('aw-sub').classList.add('hidden');
+  }
+
+  // ── Procedure chips ──
   function toggleChip(el, val) {
     el.classList.toggle('sel');
     var idx = state.chips.indexOf(val);
@@ -521,53 +523,57 @@
     });
   }
 
+  // ── Diagnosis chips ──
   function toggleDiag(el, val) {
     el.classList.toggle('sel');
     var idx = state.diag.indexOf(val);
     if (idx === -1) { state.diag.push(val); } else { state.diag.splice(idx, 1); }
   }
 
+  // ── Tag chips ──
   function toggleTag(el, val) {
     el.classList.toggle('sel');
     var idx = state.tags.indexOf(val);
     if (idx === -1) { state.tags.push(val); } else { state.tags.splice(idx, 1); }
   }
 
+  // ── Error message ──
   function showErr(msg) {
     var el = document.getElementById('err-msg');
     el.textContent = msg;
     setTimeout(function() { el.textContent = ''; }, 3000);
   }
 
-  function showToast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(function() { t.classList.remove('show'); }, 2500);
-  }
-
+  // ── Submit ──
   function submitForm() {
-    var name = document.getElementById('f-name').value.trim();
-    if (!name) { showErr('請填寫患者姓名'); return; }
+    var date  = document.getElementById('f-date').value.trim();
+    var name  = document.getElementById('f-name').value.trim();
+    var chart = document.getElementById('f-chart').value.trim();
+    var age   = document.getElementById('f-age').value.trim();
+
+    if (!date)  { showErr('請填寫日期'); return; }
+    if (!name)  { showErr('請填寫患者姓名'); return; }
+    if (!chart) { showErr('請填寫病歷號'); return; }
+    if (!age)   { showErr('請填寫年齡'); return; }
     if (state.chips.length === 0) { showErr('請選擇至少一項處置項目'); return; }
 
+    var diagOther = document.getElementById('f-diag-obs-other').value.trim() ||
+                    document.getElementById('f-diag-gyn-other').value.trim();
+    var tagOther  = document.getElementById('f-tag-other').value.trim();
+    var allDiag   = diagOther ? state.diag.concat([diagOther]) : state.diag.slice();
+    var allTags   = tagOther  ? state.tags.concat([tagOther])  : state.tags.slice();
+
     var payload = {
-      date:   document.getElementById('f-date').value,
+      date:   date,
       clinic: state.clinic,
       name:   name,
-      chart:  document.getElementById('f-chart').value.trim(),
-      age:    document.getElementById('f-age').value.trim(),
+      chart:  chart,
+      age:    age,
       branch: state.branch,
       ga:     document.getElementById('f-ga').value.trim(),
       chips:  state.chips.join('、'),
-      diag:   (state.diag.concat(
-                (document.getElementById('f-diag-obs-other').value.trim() ? [document.getElementById('f-diag-obs-other').value.trim()] : [])
-               ).concat(
-                (document.getElementById('f-diag-gyn-other').value.trim() ? [document.getElementById('f-diag-gyn-other').value.trim()] : [])
-               )).join('、'),
-      tags:   (state.tags.concat(
-                (document.getElementById('f-tag-other').value.trim() ? [document.getElementById('f-tag-other').value.trim()] : [])
-               )).join('、'),
+      diag:   allDiag.join('、'),
+      tags:   allTags.join('、'),
       note:   document.getElementById('f-note').value.trim()
     };
 
@@ -597,19 +603,20 @@
       });
   }
 
+  // ── Build summary ──
   function buildSummary(p) {
     var rows = [
       { l: '日期', v: p.date },
       { l: '院區', v: p.clinic },
       { l: '姓名', v: p.name },
+      { l: '病歷號', v: p.chart },
+      { l: '年齡', v: p.age + ' 歲' },
+      { l: '科別', v: p.branch },
     ];
-    if (p.chart) rows.push({ l: '病歷號', v: p.chart });
-    if (p.age)   rows.push({ l: '年齡',   v: p.age + ' 歲' });
-    rows.push({ l: '科別', v: p.branch });
     if (p.ga)    rows.push({ l: '孕週 GA', v: p.ga });
     rows.push({ l: '處置', chips: p.chips.split('、') });
-    if (p.diag) rows.push({ l: '診斷', chips: p.diag.split('、') });
-    if (p.tags) rows.push({ l: '標籤', chips: p.tags.split('、'), isTag: true });
+    if (p.diag)  rows.push({ l: '診斷', chips: p.diag.split('、') });
+    if (p.tags)  rows.push({ l: '標籤', chips: p.tags.split('、'), isTag: true });
     if (p.note)  rows.push({ l: '備注', v: p.note });
 
     var html = rows.map(function(r, i) {
@@ -625,19 +632,31 @@
     document.getElementById('summary-box').innerHTML = html;
   }
 
+  // ── New record ──
   function newRecord() {
-    ['f-name', 'f-chart', 'f-age', 'f-ga', 'f-note', 'f-diag-obs-other', 'f-diag-gyn-other', 'f-tag-other'].forEach(function(id) {
+    // reset text inputs
+    ['f-name','f-chart','f-age','f-ga','f-note','f-diag-obs-other','f-diag-gyn-other','f-tag-other'].forEach(function(id) {
       document.getElementById(id).value = '';
     });
     document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
-    state.chips = [];
-    state.diag = [];
-    state.tags = [];
-    document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
-    document.getElementById('svd-sub').classList.add('hidden');
-    document.getElementById('aw-sub').classList.add('hidden');
-    document.getElementById('diag-obs').classList.toggle('hidden', state.branch !== '產科');
-    document.getElementById('diag-gyn').classList.toggle('hidden', state.branch !== '婦科');
+
+    // reset state
+    resetChipsAndDiag();
+
+    // reset clinic seg to 璟馨
+    document.querySelectorAll('.seg-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelector('[onclick="setSeg(\'clinic\',\'璟馨\',this)"]').classList.add('active');
+    document.querySelector('[onclick="setBranch(\'產科\',this)"]').classList.add('active');
+    state.clinic = '璟馨';
+    state.branch = '產科';
+
+    // show correct branch
+    document.getElementById('branch-obs').classList.remove('hidden');
+    document.getElementById('branch-gyn').classList.add('hidden');
+    document.getElementById('diag-obs').classList.remove('hidden');
+    document.getElementById('diag-gyn').classList.add('hidden');
+
+    // switch views
     document.getElementById('form-view').classList.remove('hidden');
     document.getElementById('confirm-view').classList.add('hidden');
     window.scrollTo(0, 0);
