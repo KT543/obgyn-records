@@ -311,23 +311,27 @@
           <div class="chips">
             <div class="chip" onclick="toggleChip(this,'自然產 SVD')">自然產 SVD</div>
             <div class="chip" onclick="toggleChip(this,'剖腹產 C/S')">剖腹產 C/S</div>
-            <div class="chip" onclick="toggleChip(this,'子宮頸環紮')">子宮頸環紮</div>
+            <div class="chip" onclick="toggleChip(this,'子宮頸環紮 Cerclage')">子宮頸環紮</div>
             <div class="chip" onclick="toggleChip(this,'D&C')">D&amp;C</div>
-            <div class="chip" onclick="toggleChip(this,'羊水穿刺')">羊水穿刺</div>
+            <div class="chip" onclick="toggleChip(this,'羊膜穿刺 Amniocentesis')">羊膜穿刺</div>
           </div>
         </div>
         <div class="sub-section hidden" id="svd-sub">
           <div class="sub-label">自然產附加項目</div>
           <div class="chips">
             <div class="chip sub" onclick="toggleChip(this,'引產 Induction')">引產 Induction</div>
-            <div class="chip sub" onclick="toggleChip(this,'真空 Vacuum')">真空 Vacuum</div>
+            <div class="chip sub" onclick="toggleChip(this,'真空吸引 Vacuum')">真空吸引 Vacuum</div>
+            <div class="chip sub" onclick="toggleChip(this,'四度裂傷')">四度裂傷</div>
+            <div class="chip sub" onclick="toggleChip(this,'胎便 Meconium')">胎便 Meconium</div>
+            <div class="chip sub" onclick="toggleChip(this,'急產 Precipitate labor')">急產</div>
           </div>
         </div>
         <div class="sub-section hidden" id="aw-sub">
-          <div class="sub-label">羊水穿刺附加項目</div>
+          <div class="sub-label">羊膜穿刺附加項目</div>
           <div class="chips">
-            <div class="chip sub" onclick="toggleChip(this,'晶片')">晶片</div>
+            <div class="chip sub" onclick="toggleChip(this,'羊水晶片')">羊水晶片</div>
             <div class="chip sub" onclick="toggleChip(this,'HD晶片')">HD晶片</div>
+            <div class="chip sub" onclick="toggleChip(this,'SG晶片')">SG晶片</div>
           </div>
         </div>
       </div>
@@ -338,15 +342,21 @@
         <div class="field">
           <label>處置項目 *</label>
           <div class="chips">
-            <div class="chip" onclick="toggleChip(this,'子宮鏡檢查（門診）')">子宮鏡（門診）</div>
-            <div class="chip" onclick="toggleChip(this,'子宮鏡手術（手術室）')">子宮鏡（手術室）</div>
-            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LSC')">腹腔鏡 LSC</div>
-            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LSM')">腹腔鏡 LSM</div>
-            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LSH')">腹腔鏡 LSH</div>
-            <div class="chip" onclick="toggleChip(this,'開腹手術 Myomectomy')">開腹 Myomectomy</div>
-            <div class="chip" onclick="toggleChip(this,'LEEP / CKC')">LEEP / CKC</div>
-            <div class="chip" onclick="toggleChip(this,'TVT / 骨盆腔重建')">TVT / 骨盆腔重建</div>
+            <div class="chip" onclick="toggleChip(this,'子宮鏡檢查 HSC')">子宮鏡檢查 HSC</div>
+            <div class="chip" onclick="toggleChip(this,'子宮鏡手術 RSC')">子宮鏡手術 RSC</div>
+            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LS Cystectomy')">LS Cystectomy</div>
+            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LS Myomectomy')">LS Myomectomy</div>
+            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LS Hysterectomy')">LS Hysterectomy</div>
+            <div class="chip" onclick="toggleChip(this,'腹腔鏡 LS Salpingectomy')">LS Salpingectomy</div>
+            <div class="chip" onclick="toggleChip(this,'Laparotomy Myomectomy')">Laparotomy Myomectomy</div>
+            <div class="chip" onclick="toggleChip(this,'LEEP Cone/ECC')">LEEP Cone/ECC</div>
             <div class="chip" onclick="toggleChip(this,'其他')">其他</div>
+          </div>
+        </div>
+        <div class="sub-section hidden" id="hsc-sub">
+          <div class="sub-label">子宮鏡手術附加項目</div>
+          <div class="chips">
+            <div class="chip sub" onclick="toggleChip(this,'Truclear 速潔刀')">Truclear 速潔刀</div>
           </div>
         </div>
       </div>
@@ -366,7 +376,6 @@
             <div class="chip diag" onclick="toggleDiag(this,'子癇前症 Preeclampsia')">子癇前症</div>
             <div class="chip diag" onclick="toggleDiag(this,'妊娠高血壓 PIH')">妊娠高血壓 PIH</div>
             <div class="chip diag" onclick="toggleDiag(this,'早產 Preterm labor')">早產</div>
-            <div class="chip diag" onclick="toggleDiag(this,'急產 Precipitate labor')">急產</div>
             <div class="chip diag" onclick="toggleDiag(this,'胎兒窘迫 Fetal distress')">胎兒窘迫</div>
             <div class="chip diag" onclick="toggleDiag(this,'妊娠糖尿病 GDM')">妊娠糖尿病 GDM</div>
             <div class="chip diag" onclick="toggleDiag(this,'胎兒異常引產 Induction for fetal anomaly')">胎兒異常引產</div>
@@ -389,6 +398,7 @@
           <label>婦科診斷（可複選）</label>
           <div class="chips">
             <div class="chip diag" onclick="toggleDiag(this,'子宮肌瘤 Myoma uteri')">子宮肌瘤</div>
+            <div class="chip diag" onclick="toggleDiag(this,'黏膜下肌瘤 Submucosal myoma')">黏膜下肌瘤</div>
             <div class="chip diag" onclick="toggleDiag(this,'卵巢囊腫 Ovarian cyst')">卵巢囊腫</div>
             <div class="chip diag" onclick="toggleDiag(this,'輸卵管囊腫 Tubal cyst')">輸卵管囊腫</div>
             <div class="chip diag" onclick="toggleDiag(this,'子宮內膜異位症 Endometriosis')">子宮內膜異位症</div>
@@ -419,6 +429,7 @@
           <div class="chip tag" onclick="toggleTag(this,'轉院成大')">轉院成大</div>
           <div class="chip tag" onclick="toggleTag(this,'轉院奇美')">轉院奇美</div>
           <div class="chip tag" onclick="toggleTag(this,'新生兒異常')">新生兒異常</div>
+          <div class="chip tag" onclick="toggleTag(this,'新生兒轉院')">新生兒轉院</div>
           <div class="chip tag" onclick="toggleTag(this,'投訴／糾紛')">投訴／糾紛</div>
           <div class="chip tag" onclick="toggleTag(this,'困難案例')">困難案例</div>
         </div>
@@ -495,6 +506,7 @@
     document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('sel'); });
     document.getElementById('svd-sub').classList.add('hidden');
     document.getElementById('aw-sub').classList.add('hidden');
+    var hscEl = document.getElementById('hsc-sub'); if (hscEl) hscEl.classList.add('hidden');
   }
 
   // ── Procedure chips ──
@@ -502,13 +514,19 @@
     el.classList.toggle('sel');
     var idx = state.chips.indexOf(val);
     if (idx === -1) { state.chips.push(val); } else { state.chips.splice(idx, 1); }
+    if (state.branch === '婦科') {
+      var hasHSC = state.chips.indexOf('子宮鏡手術 RSC') !== -1;
+      var hscEl = document.getElementById('hsc-sub');
+      if (hscEl) hscEl.classList.toggle('hidden', !hasHSC);
+      if (!hasHSC) clearSub(['Truclear 速潔刀']);
+    }
     if (state.branch === '產科') {
       var hasSVD = state.chips.indexOf('自然產 SVD') !== -1;
-      var hasAW  = state.chips.indexOf('羊水穿刺') !== -1;
+      var hasAW  = state.chips.indexOf('羊膜穿刺 Amniocentesis') !== -1;
       document.getElementById('svd-sub').classList.toggle('hidden', !hasSVD);
       document.getElementById('aw-sub').classList.toggle('hidden', !hasAW);
-      if (!hasSVD) clearSub(['引產 Induction', '真空 Vacuum']);
-      if (!hasAW)  clearSub(['晶片', 'HD晶片']);
+      if (!hasSVD) clearSub(['引產 Induction', '真空吸引 Vacuum', '四度裂傷', '胎便 Meconium', '急產 Precipitate labor']);
+      if (!hasAW)  clearSub(['羊水晶片', 'HD晶片', 'SG晶片']);
     }
   }
 
