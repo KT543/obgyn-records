@@ -584,7 +584,6 @@
       chart:  chart,
       age:    age,
       branch: state.branch,
-      ga:     document.getElementById('f-ga').value.trim(),
       chips:  state.chips.join('、'),
       diag:   allDiag.join('、'),
       tags:   allTags.join('、'),
@@ -649,7 +648,7 @@
   // ── New record ──
   function newRecord() {
     // reset text inputs
-    ['f-name','f-chart','f-age','f-ga','f-note','f-diag-obs-other','f-diag-gyn-other','f-tag-other'].forEach(function(id) {
+    ['f-name','f-chart','f-age','f-note','f-diag-obs-other','f-diag-gyn-other','f-tag-other'].forEach(function(id) {
       document.getElementById(id).value = '';
     });
     document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
